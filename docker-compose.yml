@@ -21,7 +21,9 @@ services:
       - N8N_RUNNERS_ENABLED=true
       - N8N_SECURE_COOKIE=false
     ports:
-      - "5678:5678"
+      - '5678:5678'
+    networks:
+      - proxy_net
     restart: always
     links:
       - postgres
@@ -43,6 +45,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+networks:
+  proxy_net:
+    external: true
+    name: network_backend_net
 
 volumes:
   db_storage:
