@@ -24,6 +24,7 @@ services:
       - '5678:5678'
     networks:
       - proxy_net
+      - n8n_internal
     restart: always
     links:
       - postgres
@@ -39,6 +40,8 @@ services:
       - POSTGRES_DB
       - POSTGRES_NON_ROOT_USER
       - POSTGRES_NON_ROOT_PASSWORD
+    networks:
+      - n8n_internal
     restart: always
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -h localhost -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
@@ -47,6 +50,14 @@ services:
       retries: 10
 
 networks:
+  n8n_internal:
+    internal: true
+    name: n8n_internal_network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.27.12.64/28
+          gateway: 172.27.12.65
   proxy_net:
     external: true
     name: network_backend_net
