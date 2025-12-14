@@ -8,8 +8,13 @@ services:
         condition: service_healthy
     volumes:
       - n8n_storage:/home/node/.n8n
-      - /opt/docker/rootca/public/zeus.crt:/opt/custom-certificates/zeus.crt:ro
-      - /opt/docker/rootca/private/zeus.key:/opt/custom-certificates/zeus.key:ro
+    secrets:
+     - server-cert
+     - source: server-cert
+        target: zeus.crt
+     - source: server-key
+        target: zeus.key
+        uid: "1000"
     environment:
       - GENERIC_TIMEZONE=Europe/Berlin
       - DB_TYPE=postgresdb
@@ -23,8 +28,8 @@ services:
       - N8N_PROTOCOL=https
       - N8N_RUNNERS_ENABLED=true
       - N8N_SECURE_COOKIE=true
-      - N8N_SSL_CERT=/opt/custom-certificates/zeus.crt
-      - N8N_SSL_KEY=/opt/custom-certificates/zeus.key
+      - N8N_SSL_CERT=/var/run/secrets/zeus.crt
+      - N8N_SSL_KEY=/var/run/secrets/zeus.key
     ports:
       - '5678:5678'
     networks:
@@ -70,3 +75,9 @@ networks:
 volumes:
   db_storage:
   n8n_storage:
+
+secrets:
+  server-cert:
+    file: "/opt/docker/rootca/public/zeus.crt"
+  server-key:
+    file: "/opt/docker/rootca/private/zeus.key"
