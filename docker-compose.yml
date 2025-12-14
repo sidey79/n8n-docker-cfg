@@ -9,6 +9,9 @@ services:
     volumes:
       - n8n_storage:/home/node/.n8n
       - ./pki:/opt/custom-certificates
+    secrets:
+     - server-cert
+     - server-key
     environment:
       - GENERIC_TIMEZONE=Europe/Berlin
       - DB_TYPE=postgresdb
@@ -29,9 +32,6 @@ services:
     networks:
       - proxy_net
       - n8n_internal
-    secrets:
-     - server-cert
-     - server-key
     restart: always
     links:
       - postgres
