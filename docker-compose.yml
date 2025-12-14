@@ -21,7 +21,7 @@ services:
       - N8N_RUNNERS_ENABLED=true
       - N8N_SECURE_COOKIE=false
     ports:
-      - "5678:5678"
+      - '5678:5678'
     networks:
       - proxy_net
     restart: always
