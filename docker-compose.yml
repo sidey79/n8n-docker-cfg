@@ -8,13 +8,10 @@ services:
         condition: service_healthy
     volumes:
       - n8n_storage:/home/node/.n8n
+      - /opt/docker/n8n/zeus.key:/var/run/secrets/zeus.key
     secrets:
-     - server-cert
      - source: server-cert
        target: zeus.crt
-     - source: server-key
-       target: zeus.key
-       uid: "1000"
     environment:
       - GENERIC_TIMEZONE=Europe/Berlin
       - DB_TYPE=postgresdb
@@ -79,5 +76,3 @@ volumes:
 secrets:
   server-cert:
     file: "/opt/docker/rootca/public/zeus.crt"
-  server-key:
-    file: "/opt/docker/rootca/private/zeus.key"
