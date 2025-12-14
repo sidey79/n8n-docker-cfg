@@ -1,10 +1,5 @@
 name: n8n Workflow Automation
 
-networks:
-  proxy_net:
-    external: true
-    name: network_backend_net
-
 services:
   n8n:
     image: docker.n8n.io/n8nio/n8n:2.0.2@sha256:e3a4256dd2aa3b987e10da3c1194081575933987b26a604a4f52d2bdd62a5b72
@@ -50,6 +45,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+networks:
+  proxy_net:
+    external: true
+    name: network_backend_net
 
 volumes:
   db_storage:
