@@ -8,7 +8,6 @@ services:
         condition: service_healthy
     volumes:
       - n8n_storage:/home/node/.n8n
-      - ./pki:/opt/custom-certificates
       - /opt/docker/rootca/public/zeus.crt:/opt/custom-certificates/zeus.crt:ro
       - /opt/docker/rootca/private/zeus.key:/opt/custom-certificates/zeus.key:ro
     environment:
