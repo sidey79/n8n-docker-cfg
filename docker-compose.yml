@@ -11,10 +11,10 @@ services:
     secrets:
      - server-cert
      - source: server-cert
-        target: zeus.crt
+       target: zeus.crt
      - source: server-key
-        target: zeus.key
-        uid: "1000"
+       target: zeus.key
+       uid: "1000"
     environment:
       - GENERIC_TIMEZONE=Europe/Berlin
       - DB_TYPE=postgresdb
