@@ -47,7 +47,16 @@ services:
       retries: 10
 
 networks:
-  proxy_net:
+  n8n_internal:
+    internal: true
+    name: n8n_internal_network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.27.12.64/28
+          gateway: 172.27.12.65
+
+proxy_net:
     external: true
     name: network_backend_net
 
