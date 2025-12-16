@@ -10,7 +10,7 @@ services:
       - n8n_storage:/home/node/.n8n
       - /opt/docker/n8n/n8n.key:/var/run/secrets/n8n.key
     secrets:
-     - source: n8n-cert
+     - source: server-cert
        target: n8n.crt
     environment:
       - GENERIC_TIMEZONE=Europe/Berlin
