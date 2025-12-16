@@ -8,7 +8,12 @@ services:
         condition: service_healthy
     volumes:
       - n8n_storage:/home/node/.n8n
+      - /opt/docker/n8n/n8n.key:/var/run/secrets/n8n.key
+    secrets:
+     - source: server-cert
+       target: n8n.crt
     environment:
+      - GENERIC_TIMEZONE=Europe/Berlin
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_HOST=postgres
       - DB_POSTGRESDB_PORT=5432
@@ -17,9 +22,11 @@ services:
       - DB_POSTGRESDB_PASSWORD=${POSTGRES_NON_ROOT_PASSWORD}
       - N8N_HOST=${DOMAIN_NAME}
       - N8N_PORT=5678
-      - N8N_PROTOCOL=http
+      - N8N_PROTOCOL=https
       - N8N_RUNNERS_ENABLED=true
-      - N8N_SECURE_COOKIE=false
+      - N8N_SECURE_COOKIE=true
+      - N8N_SSL_CERT=/var/run/secrets/n8n.crt
+      - N8N_SSL_KEY=/var/run/secrets/n8n.key
     ports:
       - '5678:5678'
     networks:
@@ -65,3 +72,7 @@ networks:
 volumes:
   db_storage:
   n8n_storage:
+
+secrets:
+  server-cert:
+    file: "/opt/docker/rootca/public/n8n.crt"
