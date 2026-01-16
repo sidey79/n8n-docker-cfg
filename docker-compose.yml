@@ -27,6 +27,7 @@ services:
       - N8N_SECURE_COOKIE=true
       - N8N_SSL_CERT=/var/run/secrets/n8n.crt
       - N8N_SSL_KEY=/var/run/secrets/n8n.key
+      - NODE_OPTIONS=${NODE_OPTIONS}
     ports:
       - '5678:5678'
     networks:
