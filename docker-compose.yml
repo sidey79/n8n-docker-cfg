@@ -2,7 +2,7 @@ name: n8n Workflow Automation
 
 services:
   n8n:
-    image: docker.n8n.io/n8nio/n8n:2.3.5
+    image: docker.n8n.io/n8nio/n8n:2.4.6
     depends_on:
       postgres:
         condition: service_healthy
