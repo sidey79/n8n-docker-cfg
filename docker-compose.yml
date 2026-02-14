@@ -38,7 +38,7 @@ services:
       - postgres
         
   postgres:
-    image: pgvector/pgvector:pg16@sha256:b7777bdf891c085d63413b4d000eacf43ccef926b2f014163aa49dbcb4acd4c6
+    image: pgvector/pgvector:pg16@sha256:33198da2828a14c30348d2ccb4750833d5ed9a44c88d840a0e523d7417120337
     volumes:
       - db_storage:/var/lib/postgresql/data
       - ./init-data.sh:/docker-entrypoint-initdb.d/init-data.sh
