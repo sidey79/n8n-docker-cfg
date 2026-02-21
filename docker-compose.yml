@@ -24,7 +24,6 @@ services:
       - N8N_HOST=${DOMAIN_NAME}
       - N8N_PORT=5678
       - N8N_PROTOCOL=https
-      - N8N_RUNNERS_ENABLED=true
       - N8N_SECURE_COOKIE=true
       - N8N_SSL_CERT=/var/run/secrets/n8n.crt
       - N8N_SSL_KEY=/var/run/secrets/n8n.key
