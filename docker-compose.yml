@@ -9,6 +9,7 @@ services:
     volumes:
       - n8n_storage:/home/node/.n8n
       - /opt/docker/n8n/n8n.key:/var/run/secrets/n8n.key
+      - ${INPUT_DATA_PATH}:/input_data
     secrets:
      - source: server-cert
        target: n8n.crt
