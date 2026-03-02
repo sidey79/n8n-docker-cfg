@@ -31,7 +31,7 @@ services:
       - NODES_EXCLUDE=${NODES_EXCLUDE:-[\"n8n-nodes-base.executeCommand\", \"n8n-nodes-base.localFileTrigger\"]}
       - N8N_RESTRICT_FILE_ACCESS_TO=/input_data;~/.n8n-files
       - N8N_PROXY_HOPS=1
-      - N8N_CONTENT_SECURITY_POLICY='{"default-src":["'self'","data:","blob:","https:"],"object-src":["'self'","data:","blob:","https:"],"frame-src":["'self'","data:","blob:","https:"],"img-src":["'self'","data:","blob:","https:"],"style-src":["'self'","'unsafe-inline'","https:"],"script-src":["'self'","'unsafe-inline'","https:"],"connect-src":["'self'","https:"]}'
+      - N8N_INSECURE_DISABLE_WEBHOOK_IFRAME_SANDBOX=true
     ports:
       - '5678:5678'
     networks:
