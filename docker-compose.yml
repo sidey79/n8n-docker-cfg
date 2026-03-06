@@ -32,6 +32,7 @@ services:
       - N8N_RESTRICT_FILE_ACCESS_TO=/input_data;~/.n8n-files
       - N8N_PROXY_HOPS=1
       - N8N_INSECURE_DISABLE_WEBHOOK_IFRAME_SANDBOX=true
+      - N8N_WEBHOOK_URL=https://${PUBLIC_WEBHOOK_DOMAIN_NAME}
     ports:
       - '5678:5678'
     networks:
