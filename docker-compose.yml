@@ -23,11 +23,14 @@ services:
       - N8N_HOST=${DOMAIN_NAME}
       - N8N_PORT=5678
       - N8N_PROTOCOL=https
-      - N8N_RUNNERS_ENABLED=true
       - N8N_SECURE_COOKIE=true
       - N8N_SSL_CERT=/var/run/secrets/n8n.crt
       - N8N_SSL_KEY=/var/run/secrets/n8n.key
       - NODE_OPTIONS=${NODE_OPTIONS}
+      - NODES_EXCLUDE=${NODES_EXCLUDE:-[\"n8n-nodes-base.executeCommand\", \"n8n-nodes-base.localFileTrigger\"]}
+      - N8N_PROXY_HOPS=1
+      - N8N_INSECURE_DISABLE_WEBHOOK_IFRAME_SANDBOX=true
+      - N8N_WEBHOOK_URL=https://${PUBLIC_WEBHOOK_DOMAIN_NAME}
     ports:
       - '5678:5678'
     networks:
