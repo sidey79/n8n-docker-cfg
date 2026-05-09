@@ -34,8 +34,10 @@ services:
     ports:
       - '5678:5678'
     networks:
-      - proxy_net
-      - n8n_internal
+      egress_net:
+        gw_priority: 1
+      proxy_net:
+      n8n_internal:
     restart: always
     links:
       - postgres
@@ -72,6 +74,13 @@ networks:
   proxy_net:
     external: true
     name: network_backend_net
+  egress_net:
+    name: n8n_egress_network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.27.12.80/30
+          gateway: 172.27.12.81
 
 volumes:
   db_storage:
