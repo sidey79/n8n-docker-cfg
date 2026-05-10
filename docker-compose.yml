@@ -30,7 +30,7 @@ services:
       - NODES_EXCLUDE=${NODES_EXCLUDE:-[\"n8n-nodes-base.executeCommand\", \"n8n-nodes-base.localFileTrigger\"]}
       - N8N_PROXY_HOPS=1
       - N8N_INSECURE_DISABLE_WEBHOOK_IFRAME_SANDBOX=true
-      - N8N_WEBHOOK_URL=https://${PUBLIC_WEBHOOK_DOMAIN_NAME}
+      - WEBHOOK_URL=https://${PUBLIC_WEBHOOK_DOMAIN_NAME}
     ports:
       - '5678:5678'
     networks:
