@@ -40,6 +40,8 @@ services:
       egress_net:
         gw_priority: 1
       proxy_net:
+        aliases:
+          - n8n.local
       n8n_internal:
     restart: always
     links:
