@@ -2,7 +2,7 @@ name: n8n Workflow Automation
 
 services:
   n8n:
-    image: ghcr.io/n8n-io/n8n:2.27.4@sha256:cf11c96b0d0089bb24459bf97b445fd7008f41543b673cce4d955f7c0ed8752d
+    image: ghcr.io/n8n-io/n8n:2.28.7@sha256:74f1ef0ec73cd1b85c3b55926732c9dfaa544a66d6bb2872fd57718c557954a4
     depends_on:
       postgres:
         condition: service_healthy
