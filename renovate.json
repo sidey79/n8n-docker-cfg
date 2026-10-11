@@ -6,5 +6,36 @@
     "default:automergeDigest"
   ],
   "separateMinorPatch": true,
-  "separateMultipleMinor": true
+  "separateMultipleMinor": true,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "n8n image tag, versions taken from GitHub releases (prereleases are ignored)",
+      "managerFilePatterns": ["/(^|/)docker-compose\\.ya?ml$/"],
+      "matchStrings": [
+        "image:\\s*ghcr\\.io/n8n-io/n8n:(?<currentValue>\\d+\\.\\d+\\.\\d+)(?:@sha256:[a-f0-9]{64})?"
+      ],
+      "depNameTemplate": "n8n-io/n8n",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "extractVersionTemplate": "^n8n@(?<version>\\d+\\.\\d+\\.\\d+)$",
+      "autoReplaceStringTemplate": "image: ghcr.io/n8n-io/n8n:{{{newValue}}}"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "The docker-compose manager must not touch n8n, the custom manager above owns that line",
+      "matchManagers": ["docker-compose"],
+      "matchPackageNames": ["ghcr.io/n8n-io/n8n"],
+      "enabled": false
+    },
+    {
+      "description": "Automerge stable n8n releases (minor/patch), wait one day so the image is surely published",
+      "matchDatasources": ["github-releases"],
+      "matchPackageNames": ["n8n-io/n8n"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "minimumReleaseAge": "1 day",
+      "automerge": true
+    }
+  ]
 }
